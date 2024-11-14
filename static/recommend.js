@@ -35,7 +35,7 @@ function recommendcard(e){
 function load_details(my_api_key,title){
   $.ajax({
     type: 'GET',
-    url:`http://www.omdbapi.com/?apikey=${my_api_key}&t=${title}`,
+    url:`https://www.omdbapi.com/?apikey=${my_api_key}&t=${title}`,
     success: function(movie){
       if(movie.Response === "False"){
         $('.fail').css('display','block');
@@ -92,7 +92,7 @@ function movie_recs(movie_title,movie_id,my_api_key){
 function get_movie_details(movie_id,my_api_key,arr,movie_title) {
   $.ajax({
     type:'GET',
-    url:`http://www.omdbapi.com/?apikey=${my_api_key}&i=${movie_id}`,
+    url:`https://www.omdbapi.com/?apikey=${my_api_key}&i=${movie_id}`,
     success: function(movie_details){
       show_details(movie_details,arr,movie_title,my_api_key,movie_id);
     },
@@ -171,7 +171,7 @@ function get_individual_cast(movie_cast,my_api_key) {
     for(var cast_id in movie_cast.cast_ids){
       $.ajax({
         type:'GET',
-        url:`http://www.omdbapi.com/?apikey=${my_api_key}&i=${movie_cast.cast_ids[cast_id]}`,
+        url:`https://www.omdbapi.com/?apikey=${my_api_key}&i=${movie_cast.cast_ids[cast_id]}`,
         async:false,
         success: function(cast_details){
           cast_bdays.push((new Date(cast_details.Born)).toDateString().split(' ').slice(1).join(' '));
@@ -192,7 +192,7 @@ function get_movie_cast(movie_id, my_api_key) {
 
   $.ajax({
       type: 'GET',
-      url: `http://www.omdbapi.com/?apikey=${my_api_key}&i=${movie_id}&plot=full`,
+      url: `https://www.omdbapi.com/?apikey=${my_api_key}&i=${movie_id}&plot=full`,
       async: false,
       success: function(my_movie) {
           if (my_movie.Actors) {
@@ -239,7 +239,7 @@ function get_movie_posters(arr, my_api_key) {
           try {
               const response = await $.ajax({
                   type: 'GET',
-                  url: `http://www.omdbapi.com/?apikey=${my_api_key}&t=${arr[m]}`,
+                  url: `https://www.omdbapi.com/?apikey=${my_api_key}&t=${arr[m]}`,
               });
               
               if (response.Response === "True" && response.Poster && response.Poster !== "N/A") {
