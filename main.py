@@ -9,6 +9,8 @@ import urllib.request
 import pickle
 import requests
 import os
+from flask_cors import CORS
+
 
 # load the nlp model and tfidf vectorizer from disk
 filename = 'nlp_model.pkl'
@@ -183,6 +185,8 @@ def recommend():
     #     movie_cards=movie_cards,reviews=movie_reviews,casts=casts,cast_details=cast_details)
 
 if __name__ == '__main__':
+    CORS(app)  
     port = int(os.environ.get("PORT", 8080))
     app.run(host="0.0.0.0", port=port)
+
 
