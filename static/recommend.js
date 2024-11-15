@@ -12,7 +12,7 @@ $(function() {
   source.addEventListener('input', inputHandler);
 
   $('.movie-button').on('click',function(){
-    var my_api_key = OMDB_API_KEY; // Replace with your OMDB API key
+    var my_api_key = '52c9c9a'; // Replace with your OMDB API key
     var title = $('.movie').val();
     if (title=="") {
       $('.results').css('display','none');
@@ -26,7 +26,7 @@ $(function() {
 
 // will be invoked when clicking on the recommended movies
 function recommendcard(e){
-  var my_api_key = OMDB_API_KEY; // Replace with your OMDB API key
+  var my_api_key = '52c9c9a'; // Replace with your OMDB API key
   var title = e.getAttribute('title'); 
   load_details(my_api_key,title);
 }

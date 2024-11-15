@@ -65,9 +65,8 @@ app = Flask(__name__)
 @app.route("/")
 @app.route("/home")
 def home():
-    api_key = os.getenv("OMDB_API_KEY") 
     suggestions = get_suggestions()
-    return render_template('home.html',suggestions=suggestions, api_key=api_key)
+    return render_template('home.html',suggestions=suggestions)
 
 @app.route("/similarity",methods=["POST"])
 def similarity():
@@ -79,8 +78,7 @@ def similarity():
         m_str="---".join(rc)
         return m_str
 
-api_key = os.getenv("OMDB_API_KEY") 
-@app.route("/recommend",methods=["POST"],api_key=api_key)
+@app.route("/recommend",methods=["POST"])
 def recommend():
     # getting data from AJAX request
     title = request.form['title']
