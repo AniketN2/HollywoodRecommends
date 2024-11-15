@@ -59,34 +59,36 @@ function load_details(my_api_key,title){
 }
 
 // passing the movie name to get the similar movies from python's flask
-function movie_recs(movie_title,movie_id,my_api_key){
+function movie_recs(movie_title, movie_id, my_api_key) {
   $.ajax({
-    type:'POST',
-    url:"/similarity",
-    data:{'name':movie_title},
-    success: function(recs){
-      if(recs=="Sorry! The movie you requested is not in our database. Please check the spelling or try with some other movies"){
-        $('.fail').css('display','block');
-        $('.results').css('display','none');
-        $("#loader").delay(500).fadeOut();
-      }
-      else {
-        $('.fail').css('display','none');
-        $('.results').css('display','block');
-        var movie_arr = recs.split('---');
-        var arr = [];
-        for(const movie in movie_arr){
-          arr.push(movie_arr[movie]);
-        }
-        get_movie_details(movie_id,my_api_key,arr,movie_title);
-      }
-    },
-    error: function(){
-      alert("error recs");
-      $("#loader").delay(500).fadeOut();
-    },
-  }); 
+      type: 'POST',
+      url: "/similarity",
+      data: { 'name': movie_title },
+      success: function(recs) {
+          if (recs.includes("Sorry!")) {
+              $('.fail').css('display', 'block');
+              $('.results').css('display', 'none');
+              $("#loader").delay(500).fadeOut();
+          } else {
+              $('.fail').css('display', 'none');
+              $('.results').css('display', 'block');
+              var movie_arr = recs.split('---');
+              var arr = [];
+              for (const movie in movie_arr) {
+                  arr.push(movie_arr[movie]);
+              }
+              get_movie_details(movie_id, my_api_key, arr, movie_title);
+          }
+      },
+      error: function(xhr, status, error) {
+          console.error("Error in /similarity request:", error);
+          console.log("Response:", xhr.responseText);
+          alert("Error in fetching recommendations");
+          $("#loader").delay(500).fadeOut();
+      },
+  });
 }
+
 
 // get all the details of the movie using the movie id.
 function get_movie_details(movie_id,my_api_key,arr,movie_title) {
