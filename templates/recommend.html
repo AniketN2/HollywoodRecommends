@@ -29,6 +29,10 @@
 	<br>
 
 <div id="mycontent">
+  <script>
+    const OMDB_API_KEY = "{{ api_key }}";
+  </script>
+  <script src="{{ url_for('static', filename='recommend.js') }}"></script>
     <div id="mcontent">
       <div class="poster-lg">
         <img class="poster" style="border-radius: 40px;margin-left: 90px;" height="400" width="250" src={{poster}}>
